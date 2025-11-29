@@ -41,12 +41,12 @@ This is ideally the only work that a Data Scientist should do. A lot of explorat
  **3. Train the ML Model on Training Dataset**  
  **4. Evaluate the ML Model Predictions (if applicable)**  
     a. Dev: Iterate through multiple parameter testing to compare evaluation results   
-    b. Prod: Run evaluation and have deployment check
-     - First Deploy: rmse < BUSINESS_THRESHOLD, fail
-     - Retrain: rmse < CURRENT_PROD_MODEL_RMSE, fail  
+    b. Prod: Run evaluation and have deployment check  
+      - First Deploy: rmse < BUSINESS_THRESHOLD, fail  
+      - Retrain: rmse < CURRENT_PROD_MODEL_RMSE, fail  
  **5. Serve the Model**  
     a. Dev: Often PoC to demonstrate  
-    b. Prod: Register the model to a Model Registry
+    b. Prod: Register the model to a Model Registry  
       - A separate serving service can then pull the latest model to utilize for predictions
 
 ## DevOps vs MLOps
