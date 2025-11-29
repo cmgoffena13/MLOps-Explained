@@ -32,19 +32,19 @@ This is ideally the only work that a Data Scientist should do. A lot of explorat
 
 ## Data Science Workflow Steps (Dev vs Prod)
 
- 1. Preprocess Data - Transform data into a usable format for ML Model  
+ **1. Preprocess Data - Transform data into a usable format for ML Model**  
     a. Dev: This includes feature creation and data cleaning. Multiple iterations and experimentation.  
-    b. Prod: Utilize an official feature table and apply any adjustments. (Feature table is loaded on a schedule by Data Engineering)
- 2. Create Training Dataset (and Test Dataset if applicable)  
+    b. Prod: Utilize an official feature table and apply any adjustments. (Feature table is loaded on a schedule by Data Engineering)  
+ **2. Create Training Dataset (and Test Dataset if applicable)**  
     a. Dev: Test multiple different splits on dataset for optimal split  
-    b. Prod: Intakes established configuration for split and applies
- 3. Train the ML Model on Training Dataset
- 4. Evaluate the ML Model Predictions (if applicable)  
+    b. Prod: Intakes established configuration for split and applies  
+ **3. Train the ML Model on Training Dataset**  
+ **4. Evaluate the ML Model Predictions (if applicable)**  
     a. Dev: Iterate through multiple parameter testing to compare evaluation results   
     b. Prod: Run evaluation and have deployment check
      - First Deploy: rmse < BUSINESS_THRESHOLD, fail
-     - Retrain: rmse < CURRENT_PROD_MODEL_RMSE, fail
- 5. Serve the Model  
+     - Retrain: rmse < CURRENT_PROD_MODEL_RMSE, fail  
+ **5. Serve the Model**  
     a. Dev: Often PoC to demonstrate  
     b. Prod: Register the model to a Model Registry
       - A separate serving service can then pull the latest model to utilize for predictions
@@ -53,9 +53,9 @@ This is ideally the only work that a Data Scientist should do. A lot of explorat
 
 Continuous Deployment needs to trigger all of the Data Science Production Workflow steps. We are not just deploying code, we are deploying a Machine Learning Model.
 
- 1. Primary deployment is the training, evaluation, and deployment of a model  
-    a. This is MLOps
- 2. Secondary deployment is any code changes to the repo that do not affect or need a primary deployment (such as adding a utility script)  
+ **1. Primary deployment is the training, evaluation, and deployment of a model**  
+    a. This is MLOps  
+ **2. Secondary deployment is any code changes to the repo that do not affect or need a primary deployment (such as adding a utility script)**  
     a. This is classic DevOps
 
 Both need to be able to occur.
@@ -140,10 +140,10 @@ To deploy a Machine Learning Model in an idempotent (~99.9%) way, we need these 
  - Feature Table and/or preprocessing logic
 
 Once these values are provided to a central code repository and merged, these steps occur:  
- 1. Regular CI/CD  
+ **1. Regular CI/CD**  
     a. Tests Run  
-    b. Deploy code to production environment
- 2. Model Deployment Process (Ran from the central repo code as a job)   
+    b. Deploy code to production environment  
+ **2. Model Deployment Process (Ran from the central repo code as a job)**   
     a. Create the Model  
     b. Create and save the training/test dataset utilizing preprocessing logic    
     c. Train the model  
