@@ -2,6 +2,30 @@
 
 This document was created to help me understand MLOps and all of the steps involved in productionalizing Machine Learning. I am utilizing Databricks and the functionality provided by that platform.
 
+## Table of Contents
+
+- [Data Science Modeling and Exploration](#data-science-modeling-and-exploration)
+- [Data Science Workflow Steps (Dev vs Prod)](#data-science-workflow-steps-dev-vs-prod)
+- [DevOps vs MLOps](#devops-vs-mlops)
+- [New Dynamics](#new-dynamics)
+  - [Code](#code)
+  - [Model, Parameters, Evaluation Metric Results](#model-parameters-evaluation-metric-results)
+  - [Training/Test Data](#trainingtest-data)
+    - [Features](#features)
+    - [Training](#training)
+    - [Evaluation](#evaluation)
+- [How To Address These New Dynamics](#how-to-address-these-new-dynamics)
+  - [Code](#code-1)
+  - [Model, Parameters, Evaluation Metric Results](#model-parameters-evaluation-metric-results-1)
+  - [Training/Test Data](#trainingtest-data-1)
+- [MLFlow](#mlflow)
+   - [MLFlow for Development](#mlflow-for-development)
+   - [MLFlow for Production](#mlflow-for-production)
+- [Deployment](#deployment)
+- [Post-Deployment Observability](#post-deployment-observability)
+- [Retraining a Model](#retraining-a-model)
+- [Summary](#summary)
+
 ## Data Science Modeling and Exploration
 
 This is ideally the only work that a Data Scientist should do. A lot of exploration and experimentation needs to be done to figure out which ML Model should be used for the problem, what parameters value should be supplied, and which features are most useful to help the model make a prediction. This process is iterative.  
@@ -82,7 +106,9 @@ This allows us to store the training/test datasets that were used to train the m
 #### Evaluation
 We also save the test predictions as a dataset during the evaluation stage. We associate this with the model_id and model_version obtained from MLFlow. This allows us to log the model predictions in production and compare distribution against our test predictions to detect any drift to signal for possible re-training. Retrain = new model version and new predictions table.
 
-## MLFlow for Development
+## MLFlow
+
+### MLFlow for Development
 
 MLFlow is an open source tool that empowers full Machine Learning development by storing key information and empowers model logging with this format:
  - Experiment (ML problem you're solving, basic structure of code)
@@ -97,7 +123,7 @@ MLFlow is an open source tool that empowers full Machine Learning development by
 
 MLFlow tracking is the ability to track/log the model runs that a Data Scientist trains. This allows for effective development by easily comparing different model runs and to easily see which features are important and which parameters provide better results.
 
-## MLFlow for Production
+### MLFlow for Production
 
 MLFlow can tie important information to a model, such as a Git Commit Sha, Test/Training/Test_Predications datasets, and metric evaluation results. This is critical for debugging and for pipeline automation. MLFlow can be utilized to:
  1. Associate Training/Test/Test_Predictions with a specific model and version.  
