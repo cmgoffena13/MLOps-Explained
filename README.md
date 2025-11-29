@@ -104,7 +104,7 @@ This schema holds each training/test/test_predictions dataset that is created fo
 This allows us to store the training/test datasets that were used to train the model before its deployment, giving us the ability to investigate/debug or retrain the model on the same data with different parameters if needed. We can then implement a cleanup job to drop old training/test datasets that are no longer needed.  
 
 #### Evaluation
-We also save the test predictions as a dataset during the evaluation stage. We associate this with the model_id and model_version obtained from MLFlow. This allows us to log the model predictions in production and compare distribution against our test predictions to detect any drift to signal for possible re-training. Retrain = new model version and new predictions table.
+We also save the test predictions as a dataset during the evaluation stage. We associate this with the model_id and model_version obtained from MLFlow. This allows us to log the model predictions in production and compare distribution against our test predictions to detect any drift to signal for possible re-training. Retrain = new model version and new test predictions table to compare for drift.
 
 ## MLFlow
 
@@ -128,8 +128,8 @@ MLFlow tracking is the ability to track/log the model runs that a Data Scientist
 MLFlow can tie important information to a model, such as a Git Commit Sha, Test/Training/Test_Predications datasets, and metric evaluation results. This is critical for debugging and for pipeline automation. MLFlow can be utilized to:
  1. Associate Training/Test/Test_Predictions with a specific model and version.  
  2. Register a model to the MLFlow Model Registry to easily be pulled by a production service.   
- 3. Grab accuracy metrics for the production model to then compare against any retraining. This allows us to determine if a retrained model is more accurate and should be deployed to the registry. 
- 4. Log and compare the current production Model's predictions against it's associated test predictions (by MLFlow's association logic) to detect drift.  
+ 3. Grab accuracy metrics for the production model to then compare against any retraining metrics. This allows us to determine if a retrained model is more accurate and should be deployed to the registry. 
+ 4. Log and compare the current production model's predictions against it's associated test predictions (by MLFlow's association logic) to detect drift.  
  5. Have specific production model performance metrics logged for monitoring
 
 ## Deployment
